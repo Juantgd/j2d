@@ -34,5 +34,14 @@ private:
   int win_height_;
 
   bool running_{false};
+  // editor config
   std::string content_;
+  int font_size_{18};
+  float line_height_{36.0f};
+  float scroll_offset_{0.0f};
+
+  SDL_Color text_color_{0, 0, 0, 255};
+  SDL_Color editor_background_color_{240, 240, 240, 255};
+
+  float fps_{60.0f};
 };
