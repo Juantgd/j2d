@@ -1,9 +1,8 @@
 ```shell
 # build
 cmake -S . -B build
-cd build
-cmake --build build
+cd build && make -j$(nproc)
 
 # run
-./build/Release/sdl3_test
+./Release/sdl3_test
 ```
