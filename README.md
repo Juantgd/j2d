@@ -1,7 +1,7 @@
 ```shell
 # build
 cmake -S . -B build
-cd build && make -j$(nproc)
+cmake --build build -j 4
 
 # run
 ./Release/sdl3_test
