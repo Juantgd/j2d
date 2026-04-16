@@ -1,4 +1,4 @@
-#include "app_entry.h"
+#include "editor_test.h"
 
 #include <cstdlib>
 
@@ -37,6 +37,12 @@ void AppEntry::EventLoop() {
       switch (ev.type) {
       case SDL_EVENT_QUIT: {
         running_ = false;
+        break;
+      }
+      case SDL_EVENT_WINDOW_RESIZED: {
+        // LOG_I("winsize: {}x{}", ev.window.data1, ev.window.data2);
+        win_width_ = ev.window.data1;
+        win_height_ = ev.window.data2;
         break;
       }
       case SDL_EVENT_KEY_DOWN: {
@@ -154,7 +160,8 @@ void AppEntry::__init_sdl() {
     LOG_E("TTF_Init failed. error: {}", SDL_GetError());
     goto failed_exit;
   }
-  win_main_ = SDL_CreateWindow(win_title_.c_str(), win_width_, win_height_, 0);
+  win_main_ = SDL_CreateWindow(win_title_.c_str(), win_width_, win_height_,
+                               SDL_WINDOW_RESIZABLE);
   if (win_main_ == nullptr) {
     LOG_E("SDL_CreateWindow failed. error: {}", SDL_GetError());
     goto failed_exit;

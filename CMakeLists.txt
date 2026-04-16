@@ -27,10 +27,37 @@ add_subdirectory("third_party/SDL_ttf" EXCLUDE_FROM_ALL)
 
 include_directories("${CMAKE_SOURCE_DIR}/include")
 
-add_executable(${PROJECT_NAME} src/main.cc src/app_entry.cc)
+add_library(component STATIC
+  src/widget/button.cc
+  src/widget/dialog.cc
+  src/widget/list.cc
+  src/widget/text.cc
+)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(component PRIVATE
   SDL3::SDL3
   SDL3_image::SDL3_image
   SDL3_ttf::SDL3_ttf
 )
+
+add_executable(${PROJECT_NAME} src/main.cc)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+  component
+)
+
+# add_executable(${PROJECT_NAME} src/main.cc src/editor_test.cc)
+#
+# target_link_libraries(${PROJECT_NAME} PRIVATE
+#   SDL3::SDL3
+#   SDL3_image::SDL3_image
+#   SDL3_ttf::SDL3_ttf
+# )
+#
+# add_executable(gui_test src/gui_test.cc)
+#
+# target_link_libraries(gui_test PRIVATE
+#   SDL3::SDL3
+#   SDL3_image::SDL3_image
+#   SDL3_ttf::SDL3_ttf
+# )
